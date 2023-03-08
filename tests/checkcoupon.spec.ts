@@ -89,7 +89,7 @@ test('Check Coupon', async ({ page }) => {
   /*
   * Assert
   */
-  //Strip £, convert to whole pennies for calc purposes. There are better suitad external libraries for monetary/currency calculations, but this avoids extra dependencies
+  //Strip £, convert to whole pennies for calc purposes. There are better suited external libraries for monetary/currency calculations, but this avoids extra dependencies
   let textTotals = [subTotal4, couponDiscount, shipping, total].map(function (x) { return x.replace('£', '') })
   let [subTotalPennies, couponDiscountPennies, shippingPennies, totalPennies] = textTotals.map(text => parseFloat(text) * 100)
 
