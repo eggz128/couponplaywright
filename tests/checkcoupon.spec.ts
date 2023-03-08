@@ -10,6 +10,7 @@ test.afterEach(async ({ page }, testInfo) => { //Cleanup after test
   await page.getByRole('link', { name: 'Remove this item' }).click();
   await page.getByRole('link', { name: 'Return to shop' }).click();
   await page.locator('#menu-item-42').getByRole('link', { name: 'Home' }).click();
+  await page.waitForTimeout(3000) //3 second dumb wait before close
 })
 
 //Orders 2 caps, uses drop down to navigate to cart,  applies edgewords coupon, asserts on coupon discount amount
@@ -17,6 +18,16 @@ test('Check Coupon', async ({ page }) => {
   /*
   *Arrange
   */
+  // { //Does Playwright have real keyboard events - docs suggest it does
+  //   //https://playwright.dev/docs/api/class-keyboard
+  //   // "Holding down Shift will type the text that corresponds to the key in the upper case."
+  //   await page.getByRole('searchbox', { name: 'Search for:' }).click();
+  //   await page.keyboard.down('Shift'); //Hold Shift
+  //   await page.keyboard.press('c');
+  //   await page.waitForTimeout(1000); //Enough time to see we get a lower case c
+  //   await page.keyboard.up('Shift'); //Release Shift
+  //   await page.getByRole('searchbox', { name: 'Search for:' }).clear();
+  // }
   await page.getByRole('searchbox', { name: 'Search for:' }).click();
   await page.getByRole('searchbox', { name: 'Search for:' }).fill('cap');
   await page.getByRole('searchbox', { name: 'Search for:' }).press('Enter')
